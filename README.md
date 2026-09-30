@@ -1,3 +1,8 @@
+> **NOTE:** This repository was cloned from the official gRPC Quick Start for educational and study purposes.
+> 
+> * **Original Repository:** [grpc-node](https://github.com/grpc/grpc-node)
+> * **My Little Contributions:** Implemented a Server Streaming example (`sayHelloStreamReply`) inside the dynamic codegen examples to practice and reinforce gRPC streaming concepts.
+
 # gRPC on Node.js
 
 ## Implementations
