@@ -52,6 +52,21 @@ function main() {
   client.sayHello({name: user}, function(err, response) {
     console.log('Greeting:', response.message);
   });
+
+  var call = client.sayHelloStreamReply({ name: user });
+
+  call.on('data', function (response) {
+    console.log('<- Pedaço do Stream recebido: ' + response.message);
+  });
+
+  call.on('end', function () {
+    console.log('> Stream finalizado');
+  });
+
+  call.on('error', function (err) {
+    console.log('> Ocorreu um erro: ', err);
+  })
+
 }
 
 main();

@@ -37,13 +37,25 @@ function sayHello(call, callback) {
   callback(null, {message: 'Hello ' + call.request.name});
 }
 
+function sayHelloStreamReply(call) {
+  console.log(`-> Enviando stream de mensagens para: ${call.request.name}`);
+  
+  call.write({ message: 'Hello: ' + call.request.name });
+
+  call.write({ message: 'Today is a good day right?' });
+
+  call.write({ message: 'gRPC Streaming ao vivo é sensacional!' });
+
+  call.end();
+}
+
 /**
  * Starts an RPC server that receives requests for the Greeter service at the
  * sample server port
  */
 function main() {
   var server = new grpc.Server();
-  server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
+  server.addService(hello_proto.Greeter.service, {sayHello: sayHello, sayHelloStreamReply: sayHelloStreamReply});
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err != null) {
       return console.error(err);
